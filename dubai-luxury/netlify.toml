@@ -1,0 +1,14 @@
+# Used when Netlify's "Base directory" is set to dubai-luxury.
+# The app is exported statically to out/ (see next.config.ts).
+
+[build]
+  command = "npm run build"
+  publish = "out"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

@@ -1,0 +1,16 @@
+# Netlify configuration for the Dr. Farah Merhi site.
+# The Next.js app lives in dubai-luxury/, not at the repository root.
+# It is built as a static export (next.config.ts -> output: "export").
+
+[build]
+  base = "dubai-luxury"
+  command = "npm run build"
+  publish = "out"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
