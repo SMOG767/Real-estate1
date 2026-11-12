@@ -1,0 +1,164 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Instrument Serif", ui-serif, Georgia, "Times New Roman", serif;
+
+  --color-cream: #f8f5f0;
+  --color-sand: #eee6d9;
+  --color-ink: #14110d;
+  --color-ink-soft: #38322a;
+  --color-muted: #6f675c;
+  --color-line: #e3d9c9;
+  --color-forest: #163328;
+  --color-forest-soft: #21473a;
+  --color-brass: #b08d57;
+  --color-brass-soft: #d8bd92;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream font-sans text-ink antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display font-normal tracking-[-0.015em];
+  }
+
+  ::selection {
+    background-color: var(--color-forest);
+    color: var(--color-cream);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brass);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .wrap {
+    @apply mx-auto w-full max-w-[1240px] px-5 sm:px-8;
+  }
+
+  .eyebrow {
+    @apply text-[11px] font-semibold uppercase tracking-[0.24em] text-brass;
+  }
+
+  .field {
+    @apply w-full rounded-xl border border-line bg-white px-4 py-3 text-[15px] text-ink outline-none transition placeholder:text-muted/70 focus:border-forest/50 focus:ring-4 focus:ring-forest/10;
+  }
+
+  .label {
+    @apply mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.14em] text-muted;
+  }
+
+  .select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5 6 6.5l5-5' stroke='%236f675c' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    @apply appearance-none pr-10;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full text-sm font-medium transition duration-200 ease-out disabled:pointer-events-none disabled:opacity-50;
+  }
+
+  .btn-primary {
+    @apply bg-forest px-6 py-3.5 text-cream hover:-translate-y-0.5 hover:bg-forest-soft hover:shadow-[0_18px_30px_-18px_rgba(22,51,40,0.75)];
+  }
+
+  .btn-brass {
+    @apply bg-brass px-6 py-3.5 text-ink hover:-translate-y-0.5 hover:bg-brass-soft hover:shadow-[0_18px_30px_-18px_rgba(176,141,87,0.8)];
+  }
+
+  .btn-outline {
+    @apply border border-ink/15 px-6 py-3.5 text-ink hover:border-ink/35 hover:bg-ink/[0.03];
+  }
+
+  .btn-light {
+    @apply bg-cream px-6 py-3.5 text-ink hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_18px_30px_-18px_rgba(0,0,0,0.5)];
+  }
+
+  .btn-ghost {
+    @apply px-4 py-2.5 text-ink/70 hover:bg-ink/[0.04] hover:text-ink;
+  }
+
+  .btn-sm {
+    @apply gap-1.5 px-4 py-2 text-[13px];
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-line bg-white/70 px-3 py-1 text-[12px] font-medium text-ink-soft;
+  }
+
+  .card {
+    @apply rounded-3xl border border-line bg-white;
+  }
+
+  .link-underline {
+    @apply relative inline-flex items-center gap-1.5 text-sm font-medium text-forest after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-forest after:transition-transform after:duration-300 hover:after:scale-x-100;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+.reveal.is-in {
+  animation: rise 0.85s cubic-bezier(0.16, 0.84, 0.44, 1) forwards;
+}
+
+.animate-fade {
+  animation: fade 1.2s ease forwards;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal,
+  .reveal.is-in,
+  .animate-fade {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
